@@ -3,7 +3,7 @@
 
     @foreach (var m in Model) {
 	<div style="display:block">
-		Friend #@m.Id "@m.FriendName" has place  @(m.Place)cm
+		Friend #@m.Id @m.FriendName has place number @(m.Place)
 		<a href="@Url.Action(nameof(FriendController.Details))"> view </a>
 		<a href="@Url.Action(nameof(FriendController.Edit))> edit </a>
 		<a href="@Url.Action(nameof(FriendController.Delete))> delete </a>

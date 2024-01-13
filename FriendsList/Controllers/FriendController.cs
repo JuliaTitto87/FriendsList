@@ -10,7 +10,7 @@ namespace FriendsList.Controllers
         // GET: FriendController
         public ActionResult Index()
         {
-            return View();
+            return View(Friends);
         }
 
         // GET: FriendController/Details/5
