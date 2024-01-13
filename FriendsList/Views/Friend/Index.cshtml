@@ -4,9 +4,9 @@
     @foreach (var m in Model) {
 	<div style="display:block">
 		Friend #@m.Id @m.FriendName has place number @(m.Place)
-
-		<a href="@Url.Action(nameof(FriendController.Edit))"> edit </a>
-		<a href="@Url.Action(nameof(FriendController.Delete))"> delete </a>
+		
+		<a href="@Url.Action(nameof(FriendController.Edit))/@m.Id"> edit </a>
+		<a href="@Url.Action(nameof(FriendController.Delete))/@m.Id"> delete </a>
 	</div>
 }
 <div style="display:block">

@@ -1,0 +1,21 @@
+﻿@model FriendsList.Models.FriendViewModel
+@using FriendsList.Controllers
+
+@using System.Linq
+
+<h2>Delete friend</h2>
+@using (Html.BeginForm(
+ actionName: nameof(FriendController.Delete),
+ controllerName: Html.ViewContext.RouteData.Values["controller"].ToString(),
+ FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.FriendName)
+    @Html.HiddenFor(model => model.Place)
+    <h2>Do you really want delete @(Model.FriendName) from the list?</h2>
+
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-primary" />
+    </div>
+}

@@ -67,17 +67,23 @@ namespace FriendsList.Controllers
 
         // GET: FriendController/Delete/5
         public ActionResult Delete(int id)
-        {
-            return View();
+		{
+			FriendViewModel friend = Friends[id];
+			return View(friend);
         }
 
         // POST: FriendController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(FriendViewModel friend)
         {
+            List<FriendViewModel> friendController = new List<FriendViewModel>();
+            friendController = Friends;
             try
             {
+                Friends.Remove(Friends[friend.Id]);
+                
+             
                 return RedirectToAction(nameof(Index));
             }
             catch
