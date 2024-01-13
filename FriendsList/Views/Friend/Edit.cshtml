@@ -1,0 +1,27 @@
+﻿@model FriendsList.Models.FriendViewModel
+@using FriendsList.Controllers
+
+@using System.Linq
+
+<h2>Edit friend</h2>
+@using (Html.BeginForm(
+  actionName: nameof(FriendController.Edit),
+  controllerName: Html.ViewContext.RouteData.Values["controller"].ToString(),
+  FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model=>model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.FriendName)
+        @Html.EditorFor(model => model.FriendName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Place)
+        @Html.EditorFor(model => model.Place)
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+}

@@ -45,7 +45,8 @@ namespace FriendsList.Controllers
         // GET: FriendController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            FriendViewModel friend = Friends[id];
+            return View(friend);
         }
 
         // POST: FriendController/Edit/5
@@ -55,6 +56,7 @@ namespace FriendsList.Controllers
         {
             try
             {
+                Friends[friend.Id] = friend;
                 return RedirectToAction(nameof(Index));
             }
             catch
