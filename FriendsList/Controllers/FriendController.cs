@@ -1,6 +1,8 @@
 ﻿using FriendsList.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Drawing.Text;
 
 namespace FriendsList.Controllers
 {
@@ -14,7 +16,7 @@ namespace FriendsList.Controllers
         }
 
         // GET: FriendController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(long id)
         {
             return View();
         }
@@ -32,7 +34,7 @@ namespace FriendsList.Controllers
         {
             try
             {
-                friend.Id=Friends.Count;
+                friend.Id = Environment.TickCount;
                 Friends.Add(friend);
                 return RedirectToAction(nameof(Index));
             }
@@ -45,8 +47,9 @@ namespace FriendsList.Controllers
         // GET: FriendController/Edit/5
         public ActionResult Edit(int id)
         {
-            FriendViewModel friend = Friends[id];
-            return View(friend);
+            FriendViewModel friend = Friends.FirstOrDefault(x => x.Id == id);
+          return View(friend);
+            
         }
 
         // POST: FriendController/Edit/5
@@ -56,7 +59,8 @@ namespace FriendsList.Controllers
         {
             try
             {
-                Friends[friend.Id] = friend;
+                int id = Friends.IndexOf(Friends.Where(x => x.Id == friend.Id).FirstOrDefault());
+                Friends[id] = friend;
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -68,8 +72,8 @@ namespace FriendsList.Controllers
         // GET: FriendController/Delete/5
         public ActionResult Delete(int id)
 		{
-			FriendViewModel friend = Friends[id];
-			return View(friend);
+            FriendViewModel friend = Friends.FirstOrDefault(x => x.Id == id);
+            return View(friend);
         }
 
         // POST: FriendController/Delete/5
@@ -81,7 +85,8 @@ namespace FriendsList.Controllers
             friendController = Friends;
             try
             {
-                Friends.Remove(Friends[friend.Id]);
+                int id = Friends.IndexOf(Friends.Where(x => x.Id == friend.Id).FirstOrDefault());
+                Friends.Remove(Friends[id]);
                 
              
                 return RedirectToAction(nameof(Index));

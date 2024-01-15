@@ -1,14 +1,26 @@
 ﻿@using FriendsList.Controllers
 @model List<FriendViewModel>;
 
-    @foreach (var m in Model) {
-	<div style="display:block">
-		Friend #@m.Id @m.FriendName has place number @(m.Place)
-		
-		<a href="@Url.Action(nameof(FriendController.Edit))/@m.Id"> edit </a>
-		<a href="@Url.Action(nameof(FriendController.Delete))/@m.Id"> delete </a>
-	</div>
-}
+<div>
+    <h2>Friends list </h2>
+<table>
+	<tr>
+		<td><p>  Friend name:  </p></td>
+		<td><p>  Place:  </p></td>
+	</tr>
+
+	@foreach (var m in Model)
+	{
+		<tr>
+			<td><p>@m.FriendName</p></td>
+			<td><p>@m.Place</p></td>
+			<td><p><a href="@Url.Action(nameof(FriendController.Edit))/@m.Id"> edit </a></p></td>
+			<td><p><a href="@Url.Action(nameof(FriendController.Delete))/@m.Id"> delete </a></p></td>
+		</tr>
+	}
+    </table>
+</div>
+
 <div style="display:block">
 	<a href="@Url.Action(nameof(FriendController.Create))"> Create </a>
 </div>
